@@ -25,7 +25,7 @@ def personalized_message(total_count):
     elif total_count < 10000000:
         return "Damn! That's a base!"
     elif total_count < 100000000:
-        return "Maybe some retention policies?"
+        return "Maybe some data retention policies?"
     elif total_count < 1000000000:
 	return "You’ve got some lines, so enjoy the time!"
     else:
