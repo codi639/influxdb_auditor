@@ -19,15 +19,15 @@ def personalized_message(total_count):
     if total_count < 10:
         return "Do you even need this script?"
     elif total_count < 100000:
-        return "Your latencies are just a story, not the cause of your worry."
+        return "You're done counting I guess..."
     elif total_count < 1000000:
-        return "You’ve got some lines, so enjoy the time!"
+        return "Your latencies are just a story, not the cause of your worry."
     elif total_count < 10000000:
         return "Damn! That's a base!"
     elif total_count < 100000000:
         return "Maybe some retention policies?"
     elif total_count < 1000000000:
-        return "You're done counting I guess..."
+	return "You’ve got some lines, so enjoy the time!"
     else:
         return "Over the rainbow..."
 
