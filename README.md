@@ -40,7 +40,7 @@ Note: `apt install` is like taking the easy way out—you cheater. 😎
 
 Ready to count some rows? Here’s how you can run the script:
 
-1. **Save the Script** - Copy the script into a file named `count_database.py` (or any name with `.py`, it's your computer).
+1. **Save the Script** - Copy the script into a file named `count_rows.py` (or any name with `.py`, it's your computer).
 2. **Customize the Arguments** - Take a quick look at the arguments section to ensure it suits your needs (default credentials, etc.).
 3. **Make It Executable** - You don’t strictly need this step if you run it with python3, but it’s good practice:
 
@@ -51,7 +51,7 @@ chmod +x count_database.py
 4. **Run the Script** - If you don't care about showing the password, use the following command to count rows.
 
 ```bash
-python3 count_database.py -H YOUR_HOST --P YOUR_PORT -u YOUR_USER -p YOUR_PASS -d YOUR_BASE
+python3 count_rows.py -H YOUR_HOST -P YOUR_PORT -u YOUR_USER -p YOUR_PASS -d YOUR_BASE --more-info
 ```
 
 Note that you can also just be prompted for the password using -K (--ask-pass).
@@ -59,7 +59,7 @@ Note that you can also just be prompted for the password using -K (--ask-pass).
 If you prefer the defaults, just run (it will probably not work without modification):
 
 ```bash
-python3 count_database.py
+python3 count_rows.py
 ```
 
 Note: default value include environment variable for username and password as `INFLUXDB_USER` & `INFLUXDB_PASSWORD`
@@ -90,7 +90,7 @@ Take a deep breath and relax—this might take a while! The script is crunching 
 Here’s an example of how the script works in action:
 
 ```bash
-root@TIG-Database:~# python3 count_database.py -u hello -p world
+root@TIG-Database:~# python3 count_rows.py -u hello -p world
 Database: supervision, Measurement: cpu_load, Count: 6197318
 Database: supervision, Measurement: interfaces, Count: 214209058
 Database: supervision, Measurement: ping, Count: 653752
@@ -101,6 +101,8 @@ Total rows across all measurements in database supervision: 221722230
 In this example, the script reports the number of rows for each measurement and provides a grand total.
 
 ## TODO
+
+Remove useless count_database.py
 
 Add script to fill lorem.
 
