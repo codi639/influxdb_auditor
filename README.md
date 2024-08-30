@@ -103,8 +103,11 @@ In this example, the script reports the number of rows for each measurement and 
 ## TODO
 
 Add script to fill lorem.
+
 ~Add script to automate backup.
+
 Add script to check latest base connexion (with timerange to check?).
+
 Add script to automatically remove data given timerange.
 
 ## Important Note
