@@ -16,6 +16,7 @@ parser.add_argument('-u', '--username', type=str, default=os.getenv('INFLUXDB_US
 parser.add_argument('-p', '--password', type=str, default=os.getenv('INFLUXDB_PASSWORD', 'password'), help='InfluxDB password')
 parser.add_argument('-d', '--database', type=str, default='supervision', help='InfluxDB database name')
 parser.add_argument('-K', '--ask-pass', action='store_true', help='Prompt for the InfluxDB password')
+parser.add_argument('--more-info', action='store_true', help='Display additional information about measurements')
 
 # Parse the arguments
 args = parser.parse_args()
@@ -71,6 +72,25 @@ except Exception as e:
     exit(1)
 
 total_count = 0
+measurement_count = len(measurements)
+
+if args.more_info:
+    print(f'Total measurements found: {measurement_count}')
+    print('Measurements:')
+    for measurement in measurements:
+        measurement_name = measurement['name']
+        print(f' - {measurement_name}')
+        
+        # Fetch and display field keys
+        field_keys = client.query(f'SHOW FIELD KEYS FROM "{measurement_name}"')
+        field_keys_list = [point['fieldKey'] for point in field_keys.get_points()]
+        print(f'  Field Keys: {", ".join(field_keys_list)}')
+
+        # Fetch and display tag keys
+        tag_keys = client.query(f'SHOW TAG KEYS FROM "{measurement_name}"')
+        tag_keys_list = [point['tagKey'] for point in tag_keys.get_points()]
+        print(f'  Tag Keys: {", ".join(tag_keys_list)}')
+        print("\n")
 
 # Iterate through each measurement
 for measurement in measurements:
@@ -103,5 +123,6 @@ for measurement in measurements:
         print(f"Error executing query on measurement '{measurement_name}' in database '{args.database}': {e}")
         continue
 
+# Output results
 print(f'Total rows across all measurements in database {args.database}: {total_count}\n')
 print(personalized_message(total_count))
