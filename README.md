@@ -100,6 +100,13 @@ Total rows across all measurements in database supervision: 221722230
 
 In this example, the script reports the number of rows for each measurement and provides a grand total.
 
+## TODO
+
+Add script to fill lorem.
+~Add script to automate backup.
+Add script to check latest base connexion (with timerange to check?).
+Add script to automatically remove data given timerange.
+
 ## Important Note
 
 The script can take quite a long time to execute. This is because it performs a COUNT operation on each measurement within the database. Depending on the size of your measurements and the performance of your InfluxDB instance, this can be time-consuming. The script processes each measurement individually and retrieves counts by executing a query for every measurement, which might lead to longer execution times for databases with many measurements or large datasets.
