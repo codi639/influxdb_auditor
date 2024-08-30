@@ -48,17 +48,21 @@ Ready to count some rows? Here’s how you can run the script:
 chmod +x count_database.py
 ```
 
-4. **Run the Script** - Use the following command to count rows. You can provide arguments or stick with the defaults:
+4. **Run the Script** - If you don't care about showing the password, use the following command to count rows.
 
 ```bash
 python3 count_database.py -H YOUR_HOST --P YOUR_PORT -u YOUR_USER -p YOUR_PASS -d YOUR_BASE
 ```
+
+Note that you can also just be prompted for the password using -K (--ask-pass).
 
 If you prefer the defaults, just run (it will probably not work without modification):
 
 ```bash
 python3 count_database.py
 ```
+
+Note: default value include environment variable for username and password as `INFLUXDB_USER` & `INFLUXDB_PASSWORD`
 
 Default values used:
 
@@ -68,12 +72,17 @@ Default values used:
 - Password: password
 - Database: supervision
 
+5. **Let the script run.** - ☕️ Take a Coffee Break
+
+Take a deep breath and relax—this might take a while! The script is crunching numbers like a caffeine-fueled data scientist.
+
 ## Script Arguments
 
 - -H, --host - IP address of your InfluxDB server.
 - -P, --port - Port number of your InfluxDB server (default: 8086).
 - -u, --username - Your InfluxDB username.
 - -p, --password - Your InfluxDB password.
+- -K, --ask-pass - Prompt the password.
 - -d, --database - The InfluxDB database name you want to count rows in.
 
 ## Example
@@ -83,7 +92,7 @@ Here’s an example of how the script works in action:
 ```bash
 root@TIG-Database:~# python3 count_database.py -u hello -p world
 Database: supervision, Measurement: cpu_load, Count: 6079612
-Database: supervision, Measurement: interfaces, Count: 155335468
+Database: supervision, Measurement: interfaces, Count: 214209058
 Database: supervision, Measurement: ping, Count: 638220
 Database: supervision, Measurement: snmp, Count: 648693
 Total rows across all measurements in database supervision: 162701993
