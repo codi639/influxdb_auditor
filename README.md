@@ -91,11 +91,11 @@ Here’s an example of how the script works in action:
 
 ```bash
 root@TIG-Database:~# python3 count_database.py -u hello -p world
-Database: supervision, Measurement: cpu_load, Count: 6079612
+Database: supervision, Measurement: cpu_load, Count: 6197318
 Database: supervision, Measurement: interfaces, Count: 214209058
-Database: supervision, Measurement: ping, Count: 638220
-Database: supervision, Measurement: snmp, Count: 648693
-Total rows across all measurements in database supervision: 162701993
+Database: supervision, Measurement: ping, Count: 653752
+Database: supervision, Measurement: snmp, Count: 662102
+Total rows across all measurements in database supervision: 221722230
 ```
 
 In this example, the script reports the number of rows for each measurement and provides a grand total.
