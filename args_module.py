@@ -12,6 +12,8 @@ def parse_args():
     parser.add_argument('-u', '--username', type=str, default=os.getenv('INFLUXDB_USER', 'user'), help='InfluxDB username')
     parser.add_argument('-p', '--password', type=str, nargs='?', default=None, help='InfluxDB password (will prompt if not provided)')
     parser.add_argument('-d', '--database', type=str, default='supervision', help='InfluxDB database name')
+
+    # More information for measurements
     parser.add_argument('--more-info', action='store_true', help='Display additional information about measurements')
 
     # Database and user creation arguments
