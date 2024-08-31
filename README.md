@@ -1,6 +1,6 @@
-# Count Rows in InfluxDB - The Ultimate Row Counter Script
+# InfluxDB Autidor - The Ultimate Auditor Script
 
-Welcome to the **Count Rows in InfluxDB V1** script! 🕵️‍♂️ If you’ve ever wondered how many rows are hiding in your InfluxDB measurements, you’ve come to the right place. This script counts them all and gives you a grand total. It’s like a treasure hunt, but with data!
+Welcome to the **Auditor InfluxDB V1** tool! 🕵️‍♂️ If you’ve ever wondered how many rows are hiding in your InfluxDB measurements, how to simply create or fill databases, you’ve come to the right place. This tool is supposed (handmaded by a non-professional dev...) to do all of this for you. It’s like a treasure hunt, but with data!
 
 ## Prerequisites
 
@@ -36,9 +36,16 @@ apt install -y python3-influxdb
 
 Note: `apt install` is like taking the easy way out—you cheater. 😎
 
-## How to Use the Script
+You also need Faker :
 
-Ready to count some rows? Here’s how you can run the script:
+```bash
+apt search faker
+apt install -y fake-factory # Please check if that's good in your case
+```
+
+## How to Use the Tool
+
+Ready to have some fun? Here’s how you can use the tool:
 
 1. **Save the Script** - Copy the script into a file named `count_rows.py` (or any name with `.py`, it's your computer).
 2. **Customize the Arguments** - Take a quick look at the arguments section to ensure it suits your needs (default credentials, etc.).
@@ -102,15 +109,17 @@ In this example, the script reports the number of rows for each measurement and 
 
 ## TODO
 
-Remove useless count_database.py
+Make the README up to date. ❌
 
-Add script to fill lorem.
+Remove useless count_database.py ✅
 
-~Add script to automate backup.
+Add script to fill lorem. ✅
 
-Add script to check latest base connexion (with timerange to check?).
+~Add script to automate backup. ❌
 
-Add script to automatically remove data given timerange.
+Add script to check latest base connexion (with timerange to check?). ❌
+
+Add script to automatically remove data given timerange. ❌
 
 ## Important Note
 
