@@ -22,6 +22,9 @@ def parse_args():
     parser.add_argument('-pc', '--password-creation', type=str, nargs='?', const=True, help='Password for the new user.')
     parser.add_argument('-per', '--permissions', type=str, choices=['read', 'write', 'all'], nargs='?', const=True, help='Permissions for the new user. Choose from: read, write, all.')
 
+    # Data generation argument
+    parser.add_argument('-n', '--num-points', type=int, default=1000, help='Number of data points to generate (default 1000)')
+
     # Parse the arguments
     args = parser.parse_args()
 
