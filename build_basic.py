@@ -1,4 +1,4 @@
-from influxdb import InfluxDBClient # type: ignore
+from influxdb import InfluxDBClient
 from args_module import parse_args
 from getpass import getpass
 
@@ -36,8 +36,19 @@ def main():
     # Handle user creation
     if args.user_creation:
         username = args.user_creation if isinstance(args.user_creation, str) else input("Enter username: ")
-        password = args.password_creation if isinstance(args.password_creation, str) else getpass("Enter password: ")
-        permissions = args.permissions if isinstance(args.permissions, str) else input("Enter permissions (read, write, all): ")
+
+        # Prompt for password if not provided
+        if args.password_creation:
+            password = args.password_creation
+        else:
+            password = getpass("Enter password for the new user: ")
+
+        # Prompt for permissions if not provided
+        if args.permissions:
+            permissions = args.permissions
+        else:
+            permissions = input("Enter permissions for the new user (read, write, all): ")
+
         create_user(client, username, password, permissions)
 
     # Close the connection
