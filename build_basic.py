@@ -1,4 +1,4 @@
-from influxdb import InfluxDBClient
+from influxdb import InfluxDBClient # type: ignore
 from args_module import parse_args
 from getpass import getpass
 import sys
