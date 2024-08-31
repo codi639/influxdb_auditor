@@ -47,6 +47,8 @@ if __name__ == "__main__":
                 print("Existing databases:")
                 for db in databases:
                     print(f" - {db['name']}")
+            else:
+                print("You can still find cute information using inspector.py")
             sys.exit(1)
 
         # Switch to the specified or default database
