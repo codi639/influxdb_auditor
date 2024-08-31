@@ -1,93 +1,85 @@
-# Count Rows in InfluxDB - The Ultimate Row Counter Script
+# InfluxDB Auditor - The Ultimate Auditor Tool
 
-Welcome to the **Count Rows in InfluxDB V1** script! 🕵️‍♂️ If you’ve ever wondered how many rows are hiding in your InfluxDB measurements, you’ve come to the right place. This script counts them all and gives you a grand total. It’s like a treasure hunt, but with data!
-
+Welcome to the **InfluxDB V1 Auditor**! 🕵️‍♂️ Whether you’re on a quest to count rows, create databases and users, or fill them with dummy data, this tool’s got your back. Think of it as your trusty sidekick in the wild world of data adventures!
+ ___
 ## Prerequisites
 
-Before diving into the script, make sure you have the following:
+Before diving in, make sure you have the following:
 
 - **Python 3** - Because Python 2 is so last decade.
 - **InfluxDB Python Client** - To interact with your InfluxDB instance.
+- **Faker** - To generate dummy data.
 
 ### Installing Dependencies
 
-Not sure if the `influxdb` Python package is installed? Check it using:
+To check if the `influxdb` Python package is installed, use:
 ```bash
 pip3 show influxdb
 ```
 
-If `pip` itself isn't installed, you might be in a bit of a pickle. Just kidding! 😜 You can install `pip3` with:
+If pip itself isn't installed, you can install it with:
 ```bash
-apt install -y pip3
+apt install -y python3-pip
 ```
 
-If you find that the `influxdb` Python package is missing, you can easily install it using `pip`:
-
+To install the influxdb Python package, use pip:
 ```bash
 pip3 install influxdb
 ```
 
-If you really don’t want to use `pip` (why not, though?), you can also install the package via `apt`:
-
+If you prefer to use apt, you can install it with:
 ```bash
 apt update
 apt install -y python3-influxdb
 ```
 
-Note: `apt install` is like taking the easy way out—you cheater. 😎
-
-## How to Use the Script
-
-Ready to count some rows? Here’s how you can run the script:
-
-1. **Save the Script** - Copy the script into a file named `count_rows.py` (or any name with `.py`, it's your computer).
-2. **Customize the Arguments** - Take a quick look at the arguments section to ensure it suits your needs (default credentials, etc.).
-3. **Make It Executable** - You don’t strictly need this step if you run it with python3, but it’s good practice:
-
+For Faker, install it with:
 ```bash
-chmod +x count_database.py
+pip3 install faker
 ```
 
-4. **Run the Script** - If you don't care about showing the password, use the following command to count rows.
-
+Or, in case iut don't work (which was my case...):
 ```bash
-python3 count_rows.py -H YOUR_HOST -P YOUR_PORT -u YOUR_USER -p YOUR_PASS -d YOUR_BASE --more-info
+apt update
+apt install -y python3-fake-factory
 ```
 
-Note that you can also just be prompted for the password using -K (--ask-pass).
+Note: Depending on your Linux distribution, the package names may vary. Ensure you have the appropriate packages installed for Faker.
 
-If you prefer the defaults, just run (it will probably not work without modification):
+## Script Overview
+
+### 1. Count Rows Script
+
+**Filename: `count_rows.py`**
+
+This script counts the number of rows in each measurement of your InfluxDB database and provides a total count.
+
+**Usage:**
 
 ```bash
-python3 count_rows.py
+Connection Arguments:
+  Arguments for connecting to InfluxDB
+
+  -H HOST, --host HOST  InfluxDB host IP address
+  -P PORT, --port PORT  InfluxDB port number (default 8086)
+  -u USERNAME, --username USERNAME
+                        InfluxDB username
+  -p [PASSWORD], --password [PASSWORD]
+                        InfluxDB password (will prompt if not provided)
+  -d DATABASE, --database DATABASE
+                        InfluxDB database name
+
+Information Arguments:
+  Arguments for displaying additional information
+
+  --more-info           Display additional information about measurements
 ```
 
-Note: default value include environment variable for username and password as `INFLUXDB_USER` & `INFLUXDB_PASSWORD`
+**Let the script run.** - ☕️ Take a Coffee Break
 
-Default values used:
+Relax while the script crunches the numbers like a caffeinated data wizard.
 
-- Host: 172.16.20.42
-- Port: 8086
-- Username: user
-- Password: password
-- Database: supervision
-
-5. **Let the script run.** - ☕️ Take a Coffee Break
-
-Take a deep breath and relax—this might take a while! The script is crunching numbers like a caffeine-fueled data scientist.
-
-## Script Arguments
-
-- -H, --host - IP address of your InfluxDB server.
-- -P, --port - Port number of your InfluxDB server (default: 8086).
-- -u, --username - Your InfluxDB username.
-- -p, --password - Your InfluxDB password.
-- -K, --ask-pass - Prompt the password.
-- -d, --database - The InfluxDB database name you want to count rows in.
-
-## Example
-
-Here’s an example of how the script works in action:
+**Example:**
 
 ```bash
 root@TIG-Database:~# python3 count_rows.py -u hello -p world
@@ -98,33 +90,109 @@ Database: supervision, Measurement: snmp, Count: 662102
 Total rows across all measurements in database supervision: 221722230
 ```
 
-In this example, the script reports the number of rows for each measurement and provides a grand total.
+### 2. Build Database and User Script
 
-## TODO
+**Filename: `build_basic.py`**
 
-Remove useless count_database.py
+This script allows you to create a new database and user in your InfluxDB instance.
 
-Add script to fill lorem.
+**Usage:**
 
-~Add script to automate backup.
+```bash
+Connection Arguments:
+  Arguments for connecting to InfluxDB
 
-Add script to check latest base connexion (with timerange to check?).
+  -H HOST, --host HOST  InfluxDB host IP address
+  -P PORT, --port PORT  InfluxDB port number (default 8086)
+  -u USERNAME, --username USERNAME
+                        InfluxDB username
+  -p [PASSWORD], --password [PASSWORD]
+                        InfluxDB password (will prompt if not provided)
+  -d DATABASE, --database DATABASE
+                        InfluxDB database name
 
-Add script to automatically remove data given timerange.
+Database and User Creation:
+  Arguments for creating databases and users
+
+  -dc [DATABASE_CREATION], --database-creation [DATABASE_CREATION]
+                        Create a new database with the specified name.
+  -uc [USER_CREATION], --user-creation [USER_CREATION]
+                        Create a new user with the specified username.
+  -pc [PASSWORD_CREATION], --password-creation [PASSWORD_CREATION]
+                        Password for the new user.
+  -per [{read,write,all}], --permissions [{read,write,all}]
+                        Permissions for the new user. Choose from: read, write, all.
+
+```
+
+Note: There's an interactive mode if no value are provided for the databse name, username, password and permissions.
+
+**Example:**
+
+```bash
+python3 build_basic.py -u admin -p -H localhost -dc -uc -per all
+InfluxDB Password:
+Enter database name: test6
+Creating database 'test6'...
+Database 'test6' created successfully.
+Enter username: test6
+Enter password for the new user:
+Creating user 'test6' with all permissions...
+User 'test6' created successfully.
+```
+
+### 3. Fill Database Script
+**Filename: `fill_lorem.py`**
+
+This script populates the specified database with dummy data using Faker. It create a measurement `Lorem_ipsum`, if it already exist just fill it.
+
+**Usage:**
+```bash
+Connection Arguments:
+  Arguments for connecting to InfluxDB
+
+  -H HOST, --host HOST  InfluxDB host IP address
+  -P PORT, --port PORT  InfluxDB port number (default 8086)
+  -u USERNAME, --username USERNAME
+                        InfluxDB username
+  -p [PASSWORD], --password [PASSWORD]
+                        InfluxDB password (will prompt if not provided)
+  -d DATABASE, --database DATABASE
+                        InfluxDB database name
+
+Data Generation:
+  Arguments for generating data
+
+  -n NUM_POINTS, --num-points NUM_POINTS
+                        Number of data points to generate (default 1000)
+```
+
+**Example:**
+```bash
+python3 fill_lorem.py -u admin -p -H localhost -d test6 -n 10000
+InfluxDB Password:
+Generating and inserting data... /
+Successfully inserted 10000 Lorem Ipsum data points.
+```
 
 ## Important Note
 
-The script can take quite a long time to execute. This is because it performs a COUNT operation on each measurement within the database. Depending on the size of your measurements and the performance of your InfluxDB instance, this can be time-consuming. The script processes each measurement individually and retrieves counts by executing a query for every measurement, which might lead to longer execution times for databases with many measurements or large datasets.
+These scripts might take a bit of time to run, especially with large datasets or lots of records. Be patient—good things come to those who wait!
 
 ## Troubleshooting
 
-If you encounter any errors:
+If you encounter any issues:
 
 - 401 Authorization Failed - Double-check your credentials. Even the best spies get caught if they use the wrong password!
-- Connection Issues - Ensure your InfluxDB server is up and running. It's hard to count rows if the server is playing hide and seek.
+- Connection Issues - Ensure your InfluxDB server is running and accessible. It's hard to count rows if the server is playing hide and seek.
 
 ## License
+This toolset is provided as-is. Use it responsibly, and remember: with great power (to manage databases) comes great responsibility. 🚀
 
-This script is provided as-is. Use it wisely, and remember: with great power (to count rows) comes great responsibility. 🚀
+Happy auditing!
 
-Happy counting!
+## **TODO**
+
+- Automate backups ❌
+- Check latest base connection with timerange ❌
+- Automatically remove data given a timerange ❌
