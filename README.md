@@ -193,6 +193,7 @@ Happy auditing!
 
 ## **TODO**
 
+- Handle error no database provided for fill_lorem ❌
 - Automate backups ❌
 - Check latest base connection with timerange ❌
 - Automatically remove data given a timerange ❌
