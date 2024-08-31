@@ -38,7 +38,7 @@ For Faker, install it with:
 pip3 install faker
 ```
 
-Or, in case iut don't work (which was my case...):
+Or, in case pip don't work (which was my case...):
 ```bash
 apt update
 apt install -y python3-fake-factory
