@@ -6,8 +6,12 @@ from spinner_module import start_spinner, stop_spinner
 
 def database_exists(client, db_name):
     """Check if a database exists in InfluxDB."""
-    databases = client.get_list_database()
-    return any(db['name'] == db_name for db in databases)
+    try:
+        databases = client.get_list_database()
+        return any(db['name'] == db_name for db in databases), databases
+    except Exception as e:
+        print(f"Error retrieving database list: {e}")
+        sys.exit(1)
 
 def personalized_message(total_count):
     if total_count < 10:
@@ -35,8 +39,14 @@ if __name__ == "__main__":
         client = InfluxDBClient(host=args.host, port=args.port, username=args.username, password=args.password)
 
         # Check if the specified database exists
-        if not database_exists(client, args.database):
+        exists, databases = database_exists(client, args.database)
+        if not exists:
             print(f"Error: The specified database '{args.database}' does not exist.")
+            view_databases = input("Would you like to see a list of existing databases? (yes/no): ").strip().lower()
+            if view_databases == 'yes':
+                print("Existing databases:")
+                for db in databases:
+                    print(f" - {db['name']}")
             sys.exit(1)
 
         # Switch to the specified or default database
