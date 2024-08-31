@@ -41,10 +41,6 @@ def main():
         print(f"An unexpected error occurred: {e}")
         sys.exit(1)
 
-    except ConnectionError as e:
-        print(f"Connection to InfluxDB failed: {e}")
-        sys.exit(1)  # Exit the script with an error status
-
     # Handle database creation
     if args.database_creation:
         db_name = args.database_creation if isinstance(args.database_creation, str) else input("Enter database name: ")

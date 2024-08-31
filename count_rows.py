@@ -4,6 +4,11 @@ import sys
 from args_module import parse_args
 from spinner_module import start_spinner, stop_spinner
 
+def database_exists(client, db_name):
+    """Check if a database exists in InfluxDB."""
+    databases = client.get_list_database()
+    return any(db['name'] == db_name for db in databases)
+
 def personalized_message(total_count):
     if total_count < 10:
         return "Do you even need this script?"
@@ -29,8 +34,14 @@ if __name__ == "__main__":
         # Connect to InfluxDB using the provided or default arguments
         client = InfluxDBClient(host=args.host, port=args.port, username=args.username, password=args.password)
 
+        # Check if the specified database exists
+        if not database_exists(client, args.database):
+            print(f"Error: The specified database '{args.database}' does not exist.")
+            sys.exit(1)
+
         # Switch to the specified or default database
         client.switch_database(args.database)
+
     except Exception as e:
         print(f"Error connecting to InfluxDB database '{args.database}': {e}")
         exit(1)

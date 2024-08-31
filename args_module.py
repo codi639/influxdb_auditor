@@ -12,7 +12,7 @@ def parse_args():
     conn_group.add_argument('-P', '--port', type=int, default=8086, help='InfluxDB port number (default 8086)')
     conn_group.add_argument('-u', '--username', type=str, default=os.getenv('INFLUXDB_USER', 'user'), help='InfluxDB username')
     conn_group.add_argument('-p', '--password', type=str, nargs='?', default=os.getenv('INFLUXDB_PASS', None), help='InfluxDB password (will prompt if not provided)')
-    conn_group.add_argument('-d', '--database', type=str, default='supervision', help='InfluxDB database name')
+    conn_group.add_argument('-d', '--database', type=str, default='lorem_ipsum', help='InfluxDB database name')
 
     # Additional information arguments group
     info_group = parser.add_argument_group('Information Arguments', 'Arguments for displaying additional information')
