@@ -1,6 +1,8 @@
 from influxdb import InfluxDBClient
 from args_module import parse_args
 from getpass import getpass
+import sys
+import requests # type: ignore
 
 def create_database(client, db_name):
     """Create a new database in InfluxDB."""
@@ -26,8 +28,27 @@ def main():
     args = parse_args()
 
     # Connect to the InfluxDB instance
-    client = InfluxDBClient(host=args.host, port=args.port, username=args.username, password=args.password, database=args.database)
+    try:
+        # Connect to the InfluxDB instance
+        client = InfluxDBClient(host=args.host, port=args.port, username=args.username, password=args.password, database=args.database)
+        client.ping()  # Check connection
 
+    except requests.exceptions.ConnectionError as e:
+        print(f"Error: Unable to connect to InfluxDB at {args.host}:{args.port}. Connection refused.")
+        sys.exit(1)  # Exit the script with an error status
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        sys.exit(1)
+
+    except ConnectionError as e:
+        print(f"Connection to InfluxDB failed: {e}")
+        sys.exit(1)  # Exit the script with an error status
+
+    # Handle database creation
+    if args.database_creation:
+        db_name = args.database_creation if isinstance(args.database_creation, str) else input("Enter database name: ")
+        create_database(client, db_name)
     # Handle database creation
     if args.database_creation:
         db_name = args.database_creation if isinstance(args.database_creation, str) else input("Enter database name: ")

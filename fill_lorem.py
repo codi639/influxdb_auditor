@@ -39,11 +39,18 @@ def write_lorem_data(host, port, database, num_points):
     points = [generate_lorem_data() for _ in range(num_points)]
     data = '\n'.join(points)
 
-    response = requests.post(url, headers=headers, data=data)
-    if response.status_code == 204:
-        print(f"\nSuccessfully inserted {num_points} Lorem Ipsum data points.")
-    else:
-        print(f"\nFailed to insert data points: {response.content}")
+    try:
+        response = requests.post(url, headers=headers, data=data)
+        if response.status_code == 204:
+            print(f"\nSuccessfully inserted {num_points} Lorem Ipsum data points.")
+        else:
+            print(f"\nFailed to insert data points: {response.content}")
+    except requests.exceptions.ConnectionError:
+        print(f"\nError: Unable to connect to InfluxDB at {host}:{port}. Connection refused.")
+    except requests.exceptions.Timeout:
+        print(f"\nError: Request to InfluxDB at {host}:{port} timed out.")
+    except requests.exceptions.RequestException as e:
+        print(f"\nAn error occurred while writing data to InfluxDB: {e}")
 
 def main():
     # Parse command-line arguments
