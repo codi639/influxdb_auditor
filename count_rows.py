@@ -1,5 +1,5 @@
 # main.py
-from influxdb import InfluxDBClient
+from influxdb import InfluxDBClient # type: ignore
 import sys
 from args_module import parse_args
 from spinner_module import start_spinner, stop_spinner
