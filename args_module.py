@@ -8,10 +8,10 @@ def parse_args():
 
     # Connection arguments group
     conn_group = parser.add_argument_group('Connection Arguments', 'Arguments for connecting to InfluxDB')
-    conn_group.add_argument('-H', '--host', type=str, default='172.16.20.42', help='InfluxDB host IP address')
+    conn_group.add_argument('-H', '--host', type=str, default='localhost', help='InfluxDB host IP address')
     conn_group.add_argument('-P', '--port', type=int, default=8086, help='InfluxDB port number (default 8086)')
     conn_group.add_argument('-u', '--username', type=str, default=os.getenv('INFLUXDB_USER', 'user'), help='InfluxDB username')
-    conn_group.add_argument('-p', '--password', type=str, nargs='?', default=None, help='InfluxDB password (will prompt if not provided)')
+    conn_group.add_argument('-p', '--password', type=str, nargs='?', default=os.getenv('INFLUXDB_PASS', None), help='InfluxDB password (will prompt if not provided)')
     conn_group.add_argument('-d', '--database', type=str, default='supervision', help='InfluxDB database name')
 
     # Additional information arguments group

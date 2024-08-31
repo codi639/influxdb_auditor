@@ -1,7 +1,7 @@
 # InfluxDB Auditor - The Ultimate Auditor Tool
 
 Welcome to the **InfluxDB V1 Auditor**! 🕵️‍♂️ Whether you’re on a quest to count rows, create databases and users, or fill them with dummy data, this tool’s got your back. Think of it as your trusty sidekick in the wild world of data adventures!
- ___
+
 ## Prerequisites
 
 Before diving in, make sure you have the following:
@@ -38,7 +38,7 @@ For Faker, install it with:
 pip3 install faker
 ```
 
-Or, in case iut don't work (which was my case...):
+Or, in case pip don't work (which was my case...):
 ```bash
 apt update
 apt install -y python3-fake-factory
@@ -193,6 +193,7 @@ Happy auditing!
 
 ## **TODO**
 
+- Handle error no database provided for fill_lorem ❌
 - Automate backups ❌
 - Check latest base connection with timerange ❌
 - Automatically remove data given a timerange ❌
