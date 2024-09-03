@@ -185,6 +185,7 @@ If you encounter any issues:
 
 - 401 Authorization Failed - Double-check your credentials. Even the best spies get caught if they use the wrong password!
 - Connection Issues - Ensure your InfluxDB server is running and accessible. It's hard to count rows if the server is playing hide and seek.
+- ModuleNotFoundError: No module named 'faker' - Well... You should try to read the prerequisites.
 
 ## License
 This toolset is provided as-is. Use it responsibly, and remember: with great power (to manage databases) comes great responsibility. 🚀
@@ -193,7 +194,9 @@ Happy auditing!
 
 ## **TODO**
 
+- Build a second more-info argument for inspector -> should also provide the quantity of rows of each measurements and databases ❌
 - Handle error no database provided for fill_lorem ❌
+- Handle error no argument provided for inspector, count_rows, build_basic & fill_lorem ❌
 - Automate backups ❌
 - Check latest base connection with timerange ❌
 - Automatically remove data given a timerange ❌
