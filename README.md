@@ -194,6 +194,7 @@ Happy auditing!
 
 ## **TODO**
 
+- Add a parameter conf-file: should take a conf file to use to connect to the base (user/port/address/etc.)
 - Build a second more-info argument for inspector -> should also provide the quantity of rows of each measurements and databases ❌
 - Handle error no database provided for fill_lorem ❌
 - Handle error no argument provided for inspector, count_rows, build_basic & fill_lorem ❌
