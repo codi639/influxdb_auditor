@@ -13,15 +13,21 @@ def create_database(client, db_name):
 def create_user(client, username, password, permissions):
     """Create a new user in InfluxDB with specified permissions."""
     print(f"Creating user '{username}' with {permissions} permissions...")
+
+    # Create the user without setting permissions
+    client.create_user(username, password)
+    print(f"User '{username}' created successfully.")
+
+    # Assign the correct permissions for the new user
     if permissions == 'read':
-        client.create_user(username, password, permissions=['read'])
+        client.query(f"GRANT READ ON {client._database} TO {username}")
     elif permissions == 'write':
-        client.create_user(username, password, permissions=['write'])
+        client.query(f"GRANT WRITE ON {client._database} TO {username}")
     elif permissions == 'all':
-        client.create_user(username, password, admin=True)
+        client.grant_admin_privileges(username)
     else:
         raise ValueError(f"Invalid permissions: {permissions}")
-    print(f"User '{username}' created successfully.")
+    print(f"Permissions '{permissions}' granted to user '{username}'.")
 
 def main():
     # Parse all arguments from args_module.py
@@ -46,9 +52,9 @@ def main():
         db_name = args.database_creation if isinstance(args.database_creation, str) else input("Enter database name: ")
         create_database(client, db_name)
     # Handle database creation
-    if args.database_creation:
-        db_name = args.database_creation if isinstance(args.database_creation, str) else input("Enter database name: ")
-        create_database(client, db_name)
+    #if args.database_creation:
+    #    db_name = args.database_creation if isinstance(args.database_creation, str) else input("Enter database name: ")
+    #    create_database(client, db_name)
 
     # Handle user creation
     if args.user_creation:
